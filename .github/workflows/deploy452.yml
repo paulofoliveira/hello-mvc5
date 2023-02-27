@@ -15,7 +15,7 @@ jobs:
   deploy-to-azure:
     name: 'Deploy to Azure'
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: windows-latest  
+    runs-on: ubuntu-latest  
     steps:  
 
     - name: 'Checkout Code'

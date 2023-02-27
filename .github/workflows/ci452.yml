@@ -39,3 +39,4 @@ jobs:
       with:
         path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
         key: webapp-cache
+        enableCrossOsArchive: true
