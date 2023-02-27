@@ -40,13 +40,11 @@ jobs:
       if: steps.versionize.outcome != 'success'
       run: echo "Skipping publishing. No release required."
     
-    - name: Download artifact
-      if: steps.versionize.outcome == 'success'
-      uses: dawidd6/action-download-artifact@v2
+    - name: 'Download from Cache'
+      uses: actions/cache@v3
       with:
-       workflow: ${{ github.event.workflow_run.workflow_id }}
-       workflow_conclusion: success
-       name: webapp
+        path: "."
+        key: webapp-cache
 
     - name: "Deploy to Azure Web App"
       if: steps.versionize.outcome == 'success'
