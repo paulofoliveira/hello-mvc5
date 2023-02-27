@@ -42,6 +42,7 @@ jobs:
         path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
          
   deploy-to-azure:
+    name: 'Deploy to Azure'
     runs-on: windows-latest
     needs: build-and-publish
     steps:    
