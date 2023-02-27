@@ -18,46 +18,44 @@ jobs:
   build-and-publish:
     name: 'Build and Publish'
     runs-on: windows-latest    
-  steps:
+    steps:
    
-   - name: 'Checkout Code'
-     uses: actions/checkout@v3
-   
-   - name: 'Setup MsBuild'
-     uses: microsoft/setup-msbuild@v1.1
-     
-   - name: 'Setup Nuget'
-     uses: nuget/setup-nuget@v1
-     
-   - name: Restore Packages
-     run: nuget restore HelloMvc5.sln
-     
-   - name: "Upload Artifact from Build Job"
-     uses: actions/upload-artifact@v3
-     with:
-       name: webapp
-       path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      - name: 'Checkout Code'
+       uses: actions/checkout@v3
+       
+      - name: 'Setup MsBuild'
+        uses: microsoft/setup-msbuild@v1.1
+         
+      - name: 'Setup Nuget'
+        uses: nuget/setup-nuget@v1
+         
+      - name: Restore Packages
+        run: nuget restore HelloMvc5.sln
+         
+      - name: "Upload Artifact from Build Job"
+        uses: actions/upload-artifact@v3
+        with:
+          name: webapp
+          path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
          
   deploy-to-azure:
     runs-on: windows-latest
     needs: build-and-publish
-  steps:
+    steps:
     
-   - name: "Download Artifact from Build Job"
-     uses: actions/download-artifact@v3
-     with:
-      name: webapp
+      - name: "Download Artifact from Build Job"
+        uses: actions/download-artifact@v3
+        with:
+         name: webapp
 
-   - name: "Deploy to Azure Web App"
-     uses: azure/webapps-deploy@v2
-     with:
-      app-name: ${{ env.APP_NAME }}
-      package: "."
-      publish-profile: ${{ env.AZURE_CREDENTIALS }}
+      - name: "Deploy to Azure Web App"
+        uses: azure/webapps-deploy@v2
+        with:
+         app-name: ${{ env.APP_NAME }}
+         package: "."
+         publish-profile: ${{ env.AZURE_CREDENTIALS }}
 
-   - name: "Delete Artifact"
-     uses: geekyeggo/delete-artifact@v2
-     with:
-      name: webapp
-   
-   
+      - name: "Delete Artifact"
+        uses: geekyeggo/delete-artifact@v2
+        with:
+         name: webapp
