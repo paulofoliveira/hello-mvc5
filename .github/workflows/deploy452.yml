@@ -14,8 +14,7 @@ jobs:
 
   deploy-to-azure:
     name: 'Deploy to Azure'
-    runs-on: windows-latest
-    needs: build-and-publish
+    runs-on: windows-latest  
     steps:    
     - name: "Download Artifact from Build Job"
       uses: actions/download-artifact@v3
