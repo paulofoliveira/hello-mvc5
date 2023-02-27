@@ -35,9 +35,9 @@ jobs:
      
    - name: "Upload Artifact from Build Job"
      uses: actions/upload-artifact@v3
-       with:
-         name: webapp
-         path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+     with:
+       name: webapp
+       path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
          
   deploy-to-azure:
     runs-on: windows-latest
