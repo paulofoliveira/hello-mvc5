@@ -33,7 +33,7 @@ jobs:
       
     - name: 'Build App'
       run: |
-        msbuild "${{ PROJECT_PATH }}" /nologo /nr:false /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+        msbuild "${{ env.PROJECT_PATH }}" /nologo /nr:false /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
          
     - name: "Upload Artifact from Build Job"
       uses: actions/upload-artifact@v3
