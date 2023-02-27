@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.0.0"></a>
+## [1.0.0](https://www.github.com/paulofoliveira/hello-mvc5/releases/tag/v1.0.0) (2023-2-27)
+
+### Features
+
+* Mudança no Title ([7bf3b08](https://www.github.com/paulofoliveira/hello-mvc5/commit/7bf3b08e30323ba05e5f904dcafa03149347a496))
+
+### Breaking Changes
+
+* Mudança no Title ([7bf3b08](https://www.github.com/paulofoliveira/hello-mvc5/commit/7bf3b08e30323ba05e5f904dcafa03149347a496))
+
+### Other
+
+* Merge branch 'main' of https://github.com/paulofoliveira/hello-mvc5 ([0cccce0](https://www.github.com/paulofoliveira/hello-mvc5/commit/0cccce0745cd0365b27f46a4bce8bb4c8f462cdd))
+
 <a name="0.0.0"></a>
 ## [0.0.0](https://www.github.com/paulofoliveira/hello-mvc5/releases/tag/v0.0.0) (2023-2-27)
 
