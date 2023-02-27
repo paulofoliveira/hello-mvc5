@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://www.github.com/paulofoliveira/hello-mvc5/releases/tag/v1.2.1) (2023-2-27)
+
+### Bug Fixes
+
+* "runs-on" deploy452 ([37cff21](https://www.github.com/paulofoliveira/hello-mvc5/commit/37cff2184ff16ad5b220863f9f9ca5f6f3c7c0d8))
+* enableCrossOsArchive ([da3a0f3](https://www.github.com/paulofoliveira/hello-mvc5/commit/da3a0f3127d9aed012288e45ce1453e0cff17f59))
+
+### Other
+
+* Merge branch 'main' of https://github.com/paulofoliveira/hello-mvc5 ([36ed3d7](https://www.github.com/paulofoliveira/hello-mvc5/commit/36ed3d7b93f669655fd6289c69d92fce6c4c9b90))
+
 <a name="1.2.0"></a>
 ## [1.2.0](https://www.github.com/paulofoliveira/hello-mvc5/releases/tag/v1.2.0) (2023-2-27)
 
