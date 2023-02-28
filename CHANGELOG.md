@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.2.4"></a>
+## [1.2.4](https://www.github.com/paulofoliveira/hello-mvc5/releases/tag/v1.2.4) (2023-2-28)
+
+### Bug Fixes
+
+* Corrjgj[ ([e55f877](https://www.github.com/paulofoliveira/hello-mvc5/commit/e55f87785d74465aef6a261d7f15d2ff44b206e4))
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://www.github.com/paulofoliveira/hello-mvc5/releases/tag/v1.2.3) (2023-2-28)
 
