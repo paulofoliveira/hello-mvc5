@@ -19,9 +19,6 @@ jobs:
 
     steps:
 
-    - name: 'Setup MsBuild'
-      uses: microsoft/setup-msbuild@v1.1
-
     - name: 'Download Artifact'
       uses: dawidd6/action-download-artifact@v2
       with:
@@ -30,5 +27,5 @@ jobs:
         name: ${{ env.PACKAGE_NAME }}
 
     - name: 'Deploy' 
-      run: | 
-        msdeploy -verb:sync -source:package=WebApp452.zip -allowUntrusted -dest:auto,computerName="https://${{ secrets.WEBDEPLOY_HOST }}/msdeploy.axd?site=${{ secrets.WEBDEPLOY_SITENAME }}",username="${{ secrets.WEBDEPLOY_USERNAME }}",password="${{ secrets.WEBDEPLOY_PASSWD }}",AuthType="Basic" -verbose -setParam:name=`'IIS Web Application Name`',value=${{ secrets.WEBDEPLOY_SITENAME }} -enableRule:DoNotDeleteRule
+      shell: cmd
+      run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -source:package=WebApp452.zip -allowUntrusted -dest:auto,computerName="https://${{ secrets.WEBDEPLOY_HOST }}/msdeploy.axd?site=${{ secrets.WEBDEPLOY_SITENAME }}",username="${{ secrets.WEBDEPLOY_USERNAME }}",password="${{ secrets.WEBDEPLOY_PASSWD }}",AuthType="Basic" -verbose -setParam:name="IIS Web Application Name",value=${{ secrets.WEBDEPLOY_SITENAME }} -enableRule:DoNotDeleteRule'
