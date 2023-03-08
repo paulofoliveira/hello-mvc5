@@ -18,6 +18,10 @@ jobs:
     runs-on: windows-latest  
 
     steps:
+
+    - name: 'Setup MsBuild'
+      uses: microsoft/setup-msbuild@v1.1
+
     - name: 'Download Artifact'
       uses: dawidd6/action-download-artifact@v2
       with:
@@ -25,6 +29,6 @@ jobs:
         workflow_conclusion: success
         name: ${{ env.PACKAGE_NAME }}
 
-    - name: 'Deploy'
+    - name: 'Deploy' 
       run: | 
         msdeploy -verb:sync -source:package=WebApp452.zip -allowUntrusted -dest:auto,computerName="https://${{ secrets.WEBDEPLOY_HOST }}/msdeploy.axd?site=${{ secrets.WEBDEPLOY_SITENAME }}",username="${{ secrets.WEBDEPLOY_USERNAME }}",password="${{ secrets.WEBDEPLOY_PASSWD }}",AuthType="Basic" -verbose -setParam:name=`'IIS Web Application Name`',value=${{ secrets.WEBDEPLOY_SITENAME }} -enableRule:DoNotDeleteRule
