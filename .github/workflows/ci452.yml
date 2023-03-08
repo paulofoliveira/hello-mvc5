@@ -10,7 +10,7 @@ on:
 
 env:
   PROJECT_PATH: 'src/WebApp452/WebApp452.csproj'
-  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/src/WebApp452/output
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\src\WebApp452\output
   SOLUTION_NAME: 'HelloMvc5.sln'
   BUILD_PLATFORM: 'Any CPU'
   BUILD_CONFIGURATION: 'Release'
