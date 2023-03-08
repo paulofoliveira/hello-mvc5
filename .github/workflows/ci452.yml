@@ -11,11 +11,14 @@ on:
 env:
   PROJECT_PATH: 'src/WebApp452/WebApp452.csproj'
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/src/WebApp452/output
+  SOLUTION_NAME: 'HelloMvc5.sln'
+  BUILD_PLATFORM: 'Any CPU'
+  BUILD_CONFIGURATION: 'Release'
 
 jobs:
 
-  build-and-publish:
-    name: 'Build and Publish'
+  build-and-package:
+    name: 'Build and Package'
     runs-on: windows-latest    
     steps:   
     - name: 'Checkout Code'
@@ -24,15 +27,15 @@ jobs:
     - name: 'Setup MsBuild'
       uses: microsoft/setup-msbuild@v1.1
          
-    - name: 'Setup Nuget'
+    - name: 'Restore Nuget Packages'
       uses: nuget/setup-nuget@v1
          
     - name: Restore Packages
-      run: nuget restore HelloMvc5.sln
+      run: nuget restore ${{ env.SOLUTION_NAME }}
       
     - name: 'Build App'
       run: |
-        msbuild "${{ env.PROJECT_PATH }}" /nologo /nr:false /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+        msbuild ${{ env.SOLUTION_NAME }} /p:platform=${{ env.BUILD_PLATFORM }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation=${{ env.PACKAGE_OUTPUT_DIRECTORY }} /p:AllowUntrustedCertificate=True /p:PrecompileBeforePublish=true
         
     - name: 'Package to Cache'
       uses: actions/cache@v3
