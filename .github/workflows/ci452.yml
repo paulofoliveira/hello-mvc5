@@ -14,6 +14,7 @@ env:
   SOLUTION_NAME: 'HelloMvc5.sln'
   BUILD_PLATFORM: 'Any CPU'
   BUILD_CONFIGURATION: 'Release'
+  PACKAGE_NAME: 'webapp'
 
 jobs:
 
@@ -37,9 +38,8 @@ jobs:
       run: |
         msbuild ${{ env.SOLUTION_NAME }} /p:platform=${{ env.BUILD_PLATFORM }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation=${{ env.PACKAGE_OUTPUT_DIRECTORY }} /p:AllowUntrustedCertificate=True /p:PrecompileBeforePublish=true
         
-    - name: 'Package to Cache'
-      uses: actions/cache@v3
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v3
       with:
+        name: ${{ env.PACKAGE_NAME }}
         path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
-        key: webapp-cache
-        enableCrossOsArchive: true
