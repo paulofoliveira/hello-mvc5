@@ -8,58 +8,23 @@ on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab 
 
 env:
-  APP_NAME: 'hellomvc5-webapp452'
-  
+  PACKAGE_NAME: 'webapp'
+
 jobs:
 
-  deploy-to-azure:
-    name: 'Deploy to Azure'
+  deploy-to-webserver:
+    name: 'Deploy Package to IIS'
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest  
-    steps:  
+    runs-on: windows-latest  
 
-    - name: 'Checkout Code'
-      uses: actions/checkout@v3
+    steps:
+    - name: 'Download Artifact'
+      uses: dawidd6/action-download-artifact@v2
       with:
-        fetch-depth: '0'
+        workflow: ${{ github.event.workflow_run.workflow_id }}
+        workflow_conclusion: success
+        name: ${{ env.PACKAGE_NAME }}
 
-    - name: 'Install Versionize'
-      run: dotnet tool install --global Versionize
-        
-    - name: 'Setup Git'
-      run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          
-    - name: Versionize Release
-      id: versionize
-      run: versionize --changelog-all --exit-insignificant-commits
-      continue-on-error: true
-
-    - name: No release required
-      if: steps.versionize.outcome != 'success'
-      run: echo "Skipping publishing. No release required."
-    
-    - name: 'Download from Cache'
-      if: steps.versionize.outcome == 'success'
-      uses: actions/cache@v3
-      with:
-        path: "."
-        key: webapp-cache
-        enableCrossOsArchive: true
-
-    - name: "Deploy to Azure Web App"
-      if: steps.versionize.outcome == 'success'
-      uses: azure/webapps-deploy@v2
-      with:
-       app-name: ${{ env.APP_NAME }}
-       package: "."
-       publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Push changes to GitHub
-      if: steps.versionize.outcome == 'success'
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
-        tags: true
+    - name: 'Deploy'      
+      run:  |
+        "C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -source:package=WebApp452.zip -allowUntrusted -dest:auto,computerName="https://${{ secrets.WEBDEPLOY_HOST }}/msdeploy.axd?site=${{ secrets.WEBDEPLOY_SITENAME }}",username="${{ secrets.WEBDEPLOY_USERNAME }}",password="${{ secrets.WEBDEPLOY_PASSWD }}",AuthType="Basic" -verbose -setParam:name=`'IIS Web Application Name`',value=${{ secrets.WEBDEPLOY_SITENAME }} -enableRule:DoNotDeleteRule
