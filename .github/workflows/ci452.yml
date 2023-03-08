@@ -24,6 +24,8 @@ jobs:
     steps:   
     - name: 'Checkout Code'
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
        
     - name: 'Setup MsBuild'
       uses: microsoft/setup-msbuild@v1.1
@@ -36,7 +38,7 @@ jobs:
       
     - name: 'Build App'
       run: |
-        msbuild ${{ env.SOLUTION_NAME }} /p:platform=${{ env.BUILD_PLATFORM }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation=${{ env.PACKAGE_OUTPUT_DIRECTORY }} /p:AllowUntrustedCertificate=True /p:PrecompileBeforePublish=true
+        msbuild ${{ env.SOLUTION_NAME }} /p:platform="${{ env.BUILD_PLATFORM }}" /p:Configuration="${{ env.BUILD_CONFIGURATION }}" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="${{ env.PACKAGE_OUTPUT_DIRECTORY }}" /p:AllowUntrustedCertificate=True /p:PrecompileBeforePublish=true
         
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
